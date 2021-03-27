@@ -32,6 +32,12 @@ const userSchema = new mongoose.Schema({
     img: {
         data: Buffer,
         contentType: String
+    },
+    imgName: {
+        type: String
+    },
+    userType: {
+        type: String
     }
 }, {
     timestamps: true

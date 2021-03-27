@@ -1,23 +1,27 @@
 const AdminBro = require('admin-bro')
 const AdminBroExpress = require('admin-bro-expressjs')
 const AdminBroMongoose = require('admin-bro-mongoose')
-
 const mongoose = require('mongoose');
-// const mongoose = require("mongoose");
-
-
 const User = require("../models/user");
-
-// module.exports = db;
 AdminBro.registerAdapter(AdminBroMongoose);
-
 
 const adminBro = new AdminBro({
   databases: [],
   rootPath: '/admin',
-  resources: [User]
+  resources: [{
+    resource: User,
+    options: {
+      properties: {
+        imgData: {
+          components: {
+            list: AdminBro.bundle('./city-content-in-list'),
+            show: AdminBro.bundle('./city-content-in-list'),
+          },
+        },
+      },
+    },
+  }],
 });
-// const router = AdminBroExpress.buildRouter(adminBro);
 
 const ADMIN = {
   email: 'test@example.com',
@@ -36,4 +40,3 @@ const router= AdminBroExpress.buildAuthenticatedRouter(adminBro, {
 });
 
 module.exports = router;
-

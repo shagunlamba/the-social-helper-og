@@ -222,7 +222,8 @@ app.post('/elderly_signup', function(req,res){
                         password: req.body.password,
                         gender: req.body.gender,
                         age: req.body.age,
-                        location: {type: "Point", coordinates: [req.body.longitude, req.body.latitude]}
+                        location: {type: "Point", coordinates: [req.body.longitude, req.body.latitude]},
+                        userType: "Elderly"
                     });
                     bcrypt.genSalt(10, function(err, salt) {
                         bcrypt.hash(newUser.password, salt, function(err, hash) {
@@ -290,7 +291,9 @@ app.post("/volunteer_signup", upload, function(req,res){
                         img: {
                             data: fs.readFileSync(path.join(__dirname+ "/public/uploads/" + req.file.filename)),
                             contentType: 'image/png'
-                        }
+                        },
+                        userType: "Volunteer",
+                        imgName: "/uploads/" + req.file.filename
                     });
                     bcrypt.genSalt(10, function(err, salt) {
                         bcrypt.hash(newUser.password, salt, function(err, hash) {
@@ -329,7 +332,6 @@ app.post("/volunteer_login", function(req,res,next){
 
 
 
-
 // Setting up the port
 const PORT = process.env.PORT || 3000;
 let server = app.listen(PORT, function(err){
@@ -342,6 +344,8 @@ let server = app.listen(PORT, function(err){
 // Chat section
 let io = socket(server);
 
+let connectedUsers = {};
+
 io.on("connection", async function(socket){
     console.log("made socket connection",socket.id);
     
@@ -352,6 +356,24 @@ io.on("connection", async function(socket){
     });
 
     socket.on("typing", function(data){
-        socket.broadcast.emit("typeing", data);
-    })
+        socket.broadcast.emit("typing", data);
+    });
+
+    socket.on("register", function(name){
+        socket.name = name;
+        connectedUsers[name] = socket;
+    });
+
+    socket.on("private", function(data){
+        const to = data.to, message = data.message;
+
+        if(connectedUsers.hasOwnProperty(to)){
+            connectedUsers[to].emit("private",{
+                name : socket.name,
+                message: message
+            })
+        }
+    });
+
+    
 })
