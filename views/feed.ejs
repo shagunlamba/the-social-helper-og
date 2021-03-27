@@ -1,0 +1,18 @@
+<%- include('partials/header') %>
+<div id=mario-chat>
+    <div id="chat-window">
+        <div id="output"></div>
+        <div id="feedback"></div>
+    </div>
+    <input type="text" id="handle" placeholder="Handle" value="<%= name %>" >
+    <input type="text" id="message" placeholder="Message"> 
+    <button id="send">Send</button>
+</div>
+
+        <a class="btn btn-light" role="button" href="/logout">Logout</a>
+
+    
+<%- include('partials/footer') %>
+<!-- brew services start mongodb-community@4.4 -->
+<!-- email: 'skncdc@gm.com', -->
+<!-- password: '123', -->
