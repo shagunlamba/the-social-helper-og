@@ -222,7 +222,8 @@ app.post('/elderly_signup', function(req,res){
                         password: req.body.password,
                         gender: req.body.gender,
                         age: req.body.age,
-                        location: {type: "Point", coordinates: [req.body.longitude, req.body.latitude]}
+                        location: {type: "Point", coordinates: [req.body.longitude, req.body.latitude]},
+                        userType: "Elderly"
                     });
                     bcrypt.genSalt(10, function(err, salt) {
                         bcrypt.hash(newUser.password, salt, function(err, hash) {
@@ -290,7 +291,9 @@ app.post("/volunteer_signup", upload, function(req,res){
                         img: {
                             data: fs.readFileSync(path.join(__dirname+ "/public/uploads/" + req.file.filename)),
                             contentType: 'image/png'
-                        }
+                        },
+                        userType: "Volunteer",
+                        imgName: "/uploads/" + req.file.filename
                     });
                     bcrypt.genSalt(10, function(err, salt) {
                         bcrypt.hash(newUser.password, salt, function(err, hash) {
@@ -326,7 +329,6 @@ app.post("/volunteer_login", function(req,res,next){
     })(req, res, next);
     console.log(req.body.userType);
 });
-
 
 
 
