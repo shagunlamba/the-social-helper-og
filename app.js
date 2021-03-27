@@ -342,6 +342,8 @@ let server = app.listen(PORT, function(err){
 // Chat section
 let io = socket(server);
 
+let connectedUsers = {};
+
 io.on("connection", async function(socket){
     console.log("made socket connection",socket.id);
     
@@ -352,6 +354,24 @@ io.on("connection", async function(socket){
     });
 
     socket.on("typing", function(data){
-        socket.broadcast.emit("typeing", data);
-    })
+        socket.broadcast.emit("typing", data);
+    });
+
+    socket.on("register", function(name){
+        socket.name = name;
+        connectedUsers[name] = socket;
+    });
+
+    socket.on("private", function(data){
+        const to = data.to, message = data.message;
+
+        if(connectedUsers.hasOwnProperty(to)){
+            connectedUsers[to].emit("private",{
+                name : socket.name,
+                message: message
+            })
+        }
+    });
+
+    
 })
