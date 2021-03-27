@@ -162,3 +162,10 @@ button{
   width: 100%;
   border-radius: 0 0 2px 2px;
 }
+
+/* locations div */
+
+.location{
+  margin: auto;
+  background-color: blue;
+}
