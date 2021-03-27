@@ -158,7 +158,14 @@ app.get('/volunteer_login', function(req,res){
 // Not visible unless authorized
 app.get('/feed', function(req,res){
     if(req.isAuthenticated()){
-        res.render("feed",{name: req.user.fullName});
+        User.find(function(err, users){
+            if(err){
+                console.log(err);
+            } else {
+                
+                res.render("feed",{name: req.user.fullName, userList: users});
+            }
+        });
     }
     else{
         res.redirect("/");

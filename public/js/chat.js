@@ -6,10 +6,29 @@ handle = document.getElementById("handle"),
 btn = document.getElementById("send"),
 output = document.getElementById("output"),
 feedback = document.getElementById("feedback"),
-sendto = document.getElementById("sendto");
-
+sendto = document.getElementById("sendto"),
+contacts = document.getElementsByClassName("contacts");
 socket.emit("register",handle.value);
+
+var x = document.getElementsByTagName("li")
+
+for(var i=0; i<x.length;i++){
+  x[i].addEventListener("click", function(e){
+    e.preventDefault();
+    const id = e.target.getAttribute("id");
+    sendto.value = id;
+  })
+}
+// .addEventListener("click", function(e){
+//   e.preventDefault();
+//   const id = e.target.getAttribute("id");
+//   sendto.value = id;
+  
+// })
+
+
 //Emit events
+
 
 btn.addEventListener("click", function(){
   // socket.emit("chat", {

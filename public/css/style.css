@@ -113,3 +113,35 @@ button{
   width: 100%;
   border-radius: 0 0 2px 2px;
 }
+
+#contacts {
+  overflow: auto;
+	height:400px;
+	background-color:#3b3e49;
+	display:inline-block;
+	font-size:15px;
+	margin-top: 30px;
+}
+
+a {
+  text-decoration: none;
+}
+
+div ul {
+  padding-left:0;
+	margin:0;
+	list-style-type:none;
+  
+	/* overflow-y:scroll; */
+}
+
+div li {
+  padding: 10px 0;
+}
+
+div li a {
+  font-size:14px;
+	color: #fff;
+	font-weight:normal;
+  
+}
