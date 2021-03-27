@@ -1,4 +1,5 @@
 const express = require("express");
+const fs = require("fs");
 const app = express();
 var path = require('path');
 const multer = require('multer');
@@ -56,10 +57,10 @@ const upload = multer({
 
 // Setting up database
 const database = require('./config/database');
-
-
 // requiring the models - schemas
 let User = require("./models/user");
+
+
 
 app.use(session({
     secret: 'Our little secret.',
@@ -248,7 +249,6 @@ app.post('/elderly_signup', function(req,res){
         }
 });
 
-const fs = require("fs");
 
 
 app.post("/volunteer_signup", upload, function(req,res){
@@ -332,6 +332,22 @@ app.post("/volunteer_login", function(req,res,next){
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // Setting up the port
 const PORT = process.env.PORT || 3000;
 let server = app.listen(PORT, function(err){
@@ -354,6 +370,6 @@ io.on("connection", async function(socket){
     });
 
     socket.on("typing", function(data){
-        socket.broadcast.emit("typeing", data);
+        socket.broadcast.emit("typing", data);
     })
 })
