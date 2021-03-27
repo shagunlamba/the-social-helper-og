@@ -1,0 +1,22 @@
+<%- include('partials/header') %>
+
+
+<section id="section" class="location-section">
+    <h1>My Google Map</h1>
+    <div id="map" style="height: 400px; width: 100%; background-color: pink;"></div>
+
+</section>
+
+
+<script>
+        function initMap(){
+            let options ={
+                zoom: 8,
+                center: {lat: 27.2046, lng: 77.4977}
+            }
+            let map = new google.maps.Map(document.getElementById("map"), options);
+        }
+</script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD6Bo3lSDo6tUAJ4zQ63sDMk8OFP8NAEBA&callback=initMap"></script>
+type="text/javascript"></script>
+<%- include('partials/footer') %>

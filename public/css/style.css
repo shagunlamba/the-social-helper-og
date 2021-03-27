@@ -2,8 +2,8 @@
   font-weight: 900;
   font-size: 3.5em;
   position:absolute;
-  top:350px;
-  left:300px;
+  top: 40%;
+  left: 30%;
 }
 
 .elderdd{
@@ -85,14 +85,7 @@ margin-right:10px;
     background-position: center;
     height:92vh;
     width: 100vw;
-
 } 
-
-
-
-}
-
-}
 
 
 
@@ -100,7 +93,7 @@ margin-right:10px;
 .footer{
   padding: 20px 0;
   text-align: center;
-  color: black;
+  color: white;
 }
 
 /* Chat styles */

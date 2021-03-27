@@ -333,7 +333,11 @@ app.post("/volunteer_login", function(req,res,next){
 
 
 
-
+// Setting up the map part
+app.get("/map", function(req,res){
+    console.log("HEYYY");
+    res.render("personal-home");
+})
 
 
 
