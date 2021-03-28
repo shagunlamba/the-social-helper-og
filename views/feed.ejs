@@ -1,16 +1,40 @@
 <%- include('partials/header') %>
+<div class="row">
+  <div class="col-sm-6">
+    <div id="contacts" class="container d-flex">
+      <ul type="none" class="nav-links">
+        <div>
+          <% userList.forEach(user =>{ %>
+            <li>
+              <a class="contacts" id="<%= user.fullName %>" href=""
+                ><%= user.fullName %></a
+              >
+            </li>
+        <% }) %>
+        </div>
+      </ul>
+    </div>
+  </div>
+  
+
+
 <div id=mario-chat>
     <div id="chat-window">
         <div id="output"></div>
         <div id="feedback"></div>
+      </div>
+      <input type="text" id="handle" placeholder="Handle" value="<%= name %>" />
+      <input type="text" id="message" placeholder="Message" />
+      <input type="text" id="sendto" placeholder="To:" />
+      <button id="send">Send</button>
     </div>
-    <input type="text" id="handle" placeholder="Handle" value="<%= name %>" >
-    <input type="text" id="message" placeholder="Message"> 
-    <input type="text" id="sendto" placeholder="To:">
-    <button id="send">Send</button>
+  </div>
 </div>
 
-        <a class="btn btn-light" role="button" href="/logout">Logout</a>
+
+<a class="btn btn-light" role="button" href="/logout">Logout</a>
+
+
 
     
 <%- include('partials/footer') %>

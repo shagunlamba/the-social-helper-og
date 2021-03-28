@@ -1,4 +1,6 @@
+require('dotenv').config();
 const express = require("express");
+const fs = require("fs");
 const app = express();
 var path = require('path');
 const multer = require('multer');
@@ -35,7 +37,7 @@ const storage = multer.diskStorage({
 function checkFileType(file, cb){
     //  checking the file extensions
     //  allowed extensions
-    const filetypes = /png|jpeg/;
+    const filetypes = /png|jpeg|jpg/;
     const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
     if(extname){
         return cb(null,true);
@@ -56,10 +58,9 @@ const upload = multer({
 
 // Setting up database
 const database = require('./config/database');
-
-
 // requiring the models - schemas
 let User = require("./models/user");
+
 
 app.use(session({
     secret: 'Our little secret.',
@@ -158,7 +159,14 @@ app.get('/volunteer_login', function(req,res){
 // Not visible unless authorized
 app.get('/feed', function(req,res){
     if(req.isAuthenticated()){
-        res.render("feed",{name: req.user.fullName});
+        User.find(function(err, users){
+            if(err){
+                console.log(err);
+            } else {
+                
+                res.render("feed",{name: req.user.fullName, userList: users});
+            }
+        });
     }
     else{
         res.redirect("/");
@@ -236,7 +244,7 @@ app.post('/elderly_signup', function(req,res){
                                 newUser.save()
                                 .then(user => {
                                     req.flash("success_msg", "User registered!");
-                                    res.redirect("/volunteer_login");
+                                    res.redirect("/elderly_login");
                                 })
                                 .catch(err => console.log(err));
                             }
@@ -248,7 +256,6 @@ app.post('/elderly_signup', function(req,res){
         }
 });
 
-const fs = require("fs");
 
 
 app.post("/volunteer_signup", upload, function(req,res){
@@ -329,6 +336,41 @@ app.post("/volunteer_login", function(req,res,next){
     })(req, res, next);
     console.log(req.body.userType);
 });
+
+
+
+
+// Setting up the map part
+app.get("/map", function(req,res){
+    console.log("HEYYY");
+    User.aggregate( [{ $geoNear: { near: { type: "Point", coordinates: [ 72.8777,19.0760 ] }, distanceField: "dist.calculated", maxDistance: 2000000000, query: { userType: "Volunteer" }, spherical: true } }], function(err, foundList){
+        if(!err){
+            console.log("The list ", foundList);
+            res.render("personal-home", {volunteerList: foundList} );  
+        } else {
+          console.log("Getting an error here: ",err);
+        }
+    });
+});
+
+const cors = require("cors");
+// Body parser
+app.use(express.json());
+// Enable cors
+app.use(cors());
+
+// app.get("/api/v1/stores", function(req,res,next){
+//     res.send("Hello World");
+// })
+// // here postman
+// app.post("/api/v1/stores", async (req,res,next) =>{
+//     console.log("The data that came in", req.body);
+// });
+
+
+
+
+
 
 
 

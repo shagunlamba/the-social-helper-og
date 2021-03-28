@@ -1,4 +1,5 @@
 const mongoose= require("mongoose");
+
 // Setting up a User Schema
 const userSchema = new mongoose.Schema({
     phoneNumber: {
@@ -25,7 +26,8 @@ const userSchema = new mongoose.Schema({
     location: {
         type: 
         { 
-            type: String 
+            type: String,
+            enum: ['Point']
         },
         coordinates: [Number]
     },
@@ -47,3 +49,4 @@ userSchema.index({ location: "2dsphere" });
 // Setting up a new user model
 const User = new mongoose.model('User', userSchema);
 module.exports= User;
+
