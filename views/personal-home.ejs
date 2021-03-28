@@ -26,7 +26,7 @@
       rel="stylesheet"
     />
     <!-- Map boxGL -->
-    <title>Store Locator</title>
+    <title>The Social Helper</title>
   </head>
   <body style="background-color: #a1cae2">
     <div class="container my-3">
@@ -51,13 +51,11 @@
                     <span> <b>Tele: </b> <%= volunteer.phoneNumber %></span>
                 </div>
                 <form id="form" action="/map" method="POST">
-                  <input type="text" name="volunteerName" value="<%= volunteer.fullName%>" hidden />
+                  <!-- <input type="text" name="volunteerName" value="<%= volunteer.fullName%>" hidden /> -->
 
                   <div class="form-group">
                       <div class='input-group date' id='datetimepicker1' style="margin: 2% 0">
-                          <!-- <input type="text" name="volunteerID" value="<%= volunteer._id %>" hidden /> -->
-
-                          <input type='text' class="form-control" required name="calender"/>
+                          <input type='text' class="form-control" name="calender" required/>
                           <span class="input-group-addon">
                                   <span class="glyphicon glyphicon-calendar"></span>
                           </span>
