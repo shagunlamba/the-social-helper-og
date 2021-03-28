@@ -5,11 +5,13 @@
       <ul type="none" class="nav-links">
         <div>
           <% userList.forEach(user =>{ %>
+            <% if(user.fullName!==name){ %>
             <li>
-              <a class="contacts" id="<%= user.fullName %>" href=""
-                ><%= user.fullName %></a
-              >
+                <a class="contacts" id="<%= user.fullName %>" href=""
+                  ><%= user.fullName %></a
+                >
             </li>
+            <% } %>
         <% }) %>
         </div>
       </ul>
@@ -24,12 +26,19 @@
         <div id="feedback"></div>
       </div>
       <input type="text" id="handle" placeholder="Handle" value="<%= name %>" />
-      <input type="text" id="message" placeholder="Message" />
-      <input type="text" id="sendto" placeholder="To:" />
+      <% if(message!== 'undefinded' && volunteerName!== 'undefinded'){ %>
+        <input type="text" id="message" placeholder="Message" value="<%= message %>"/>
+        <input type="text" id="sendto" placeholder="To:" value="<%= volunteerName%>"/>
+      <% } else{ %>
+        <input type="text" id="message" placeholder="Message" />
+        <input type="text" id="sendto" placeholder="To:" />
+      <% } %>
+
+      <!-- <input type="text" id="message" placeholder="Message" />
+      <input type="text" id="sendto" placeholder="To:" /> -->
       <button id="send">Send</button>
     </div>
   </div>
-</div>
 
 
 <a class="btn btn-light" role="button" href="/logout">Logout</a>
