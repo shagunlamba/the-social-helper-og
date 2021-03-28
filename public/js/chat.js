@@ -45,9 +45,9 @@ btn.addEventListener("click", function(){
   
 });
 
-message.addEventListener("keydown",function(){
-  socket.emit("typing", handle.value);
-})
+// message.addEventListener("keydown",function(){
+//   socket.emit("typing", handle.value);
+// })
 
 //Listen for events
 socket.on("chat", function(data){
@@ -56,9 +56,9 @@ socket.on("chat", function(data){
 
 });
 
-socket.on("typing", function(data){
-  feedback.innerHTML = "<p><em>"+data+" is typing a message</em></p>";
-});
+// socket.on("typing", function(data){
+//   feedback.innerHTML = "<p><em>"+data+" is typing a message</em></p>";
+// });
 
 socket.on("private", function(data){
   output.innerHTML += "<p><strong>"+data.name+": </strong>"+data.message+"</p>";

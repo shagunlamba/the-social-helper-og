@@ -163,8 +163,7 @@ app.get('/feed', function(req,res){
             if(err){
                 console.log(err);
             } else {
-                
-                res.render("feed",{name: req.user.fullName, userList: users});
+                res.render("feed",{name: req.user.fullName, userList: users, message: "", volunteerName: ""});
             }
         });
     }
@@ -172,6 +171,8 @@ app.get('/feed', function(req,res){
         res.redirect("/");
     }
 });
+
+
 
 // For logout of the user
 app.get('/logout', function(req,res){
@@ -184,11 +185,10 @@ app.get('/logout', function(req,res){
 // For loggin in the old user in the databse
 app.post('/elderly_login', function(req,res, next){
     passport.authenticate('local', {
-        successRedirect: '/feed',
+        successRedirect: '/map',
         failureRedirect: '/elderly_login',
         failureFlash: true
       })(req, res, next);
-    console.log(req.body.userType);
 });
     
 
@@ -222,7 +222,6 @@ app.post('/elderly_signup', function(req,res){
                     });
                 }
                 else{
-                    console.log("In app.js longi, lati", req.body.longitude, req.body.latitude);
                     // Using bcrypt to hash the password
                     const newUser = new User({
                         fullName: req.body.fullName,
@@ -250,7 +249,7 @@ app.post('/elderly_signup', function(req,res){
                             }
                         });
                     });
-                    console.log(newUser);
+                    // console.log(newUser);
                 }
             });
         }
@@ -342,13 +341,39 @@ app.post("/volunteer_login", function(req,res,next){
 
 // Setting up the map part
 app.get("/map", function(req,res){
-    console.log("HEYYY");
-    User.aggregate( [{ $geoNear: { near: { type: "Point", coordinates: [ 72.8777,19.0760 ] }, distanceField: "dist.calculated", maxDistance: 2000000000, query: { userType: "Volunteer" }, spherical: true } }], function(err, foundList){
-        if(!err){
-            console.log("The list ", foundList);
-            res.render("personal-home", {volunteerList: foundList} );  
+    if(req.isAuthenticated() && req.user.userType==="Elderly")
+    {
+        console.log("Request", req.user);
+        console.log("The locations:", req.user.location.coordinates[0], " ",req.user.location.coordinates[1]);
+        User.aggregate( [{ $geoNear: { near: { type: "Point", coordinates: [ req.user.location.coordinates[0],req.user.location.coordinates[1] ] }, distanceField: "dist.calculated", maxDistance: 2000000000, query: { userType: "Volunteer" }, spherical: true } }], function(err, foundList){
+            if(!err){
+                res.render("personal-home", {volunteerList: foundList} );  
+            } else {
+              console.log("Getting an error here: ",err);
+            }
+        });
+    }
+    else{
+        res.redirect("/");
+    }
+    
+});
+
+
+
+app.post("/map", function(req,res){
+    console.log("The request coming in", req.body);
+    const volunteerName = req.body.volunteerName;
+    const date=req.body.calender.split(" ")[0];
+    const time=req.body.calender.split(" ")[1];
+    const msg="Hello volunteer can you meet on "+ date+ " at "+ time + " "+ req.body.calender.split(" ")[2];
+    User.find(function(err, users){
+        if(err){
+            console.log(err);
         } else {
-          console.log("Getting an error here: ",err);
+            // console.log("HERE", req.user);
+            res.render("feed",{name: req.user.fullName, userList: users, message: msg, volunteerName: volunteerName});
+            console.log("The message that came in", msg);
         }
     });
 });
@@ -397,9 +422,9 @@ io.on("connection", async function(socket){
 
     });
 
-    socket.on("typing", function(data){
-        socket.broadcast.emit("typing", data);
-    });
+    // socket.on("typing", function(data){
+    //     socket.broadcast.emit("typing", data);
+    // });
 
     socket.on("register", function(name){
         socket.name = name;

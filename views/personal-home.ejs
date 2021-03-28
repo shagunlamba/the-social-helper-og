@@ -31,7 +31,7 @@
   <body style="background-color: #a1cae2">
     <div class="container my-3">
       <h1 class="display-4 text-center">
-        <i class="fas fa-map-marked mr-4"></i>Your Location
+        <i class="fas fa-map-marked mr-4" style="margin-right: 2%;"></i>Your Location
       </h1>
       <div
         id="map"
@@ -50,16 +50,20 @@
                     <span> <b>Gender: </b><%= volunteer.gender %></span>
                     <span> <b>Tele: </b> <%= volunteer.phoneNumber %></span>
                 </div>
-                <form id="form" onsubmit="">
-                <div class="form-group">
-                    <div class='input-group date' id='datetimepicker1' style="margin: 2% 0">
-                        <input type='text' class="form-control" required/>
-                        <span class="input-group-addon">
-                                <span class="glyphicon glyphicon-calendar"></span>
-                        </span>
-                    </div>
-                    <button class="btn-primary btn-lg" type="submit">Set up Meet!</button>
-                </div>
+                <form id="form" action="/map" method="POST">
+                  <input type="text" name="volunteerName" value="<%= volunteer.fullName%>" hidden />
+
+                  <div class="form-group">
+                      <div class='input-group date' id='datetimepicker1' style="margin: 2% 0">
+                          <!-- <input type="text" name="volunteerID" value="<%= volunteer._id %>" hidden /> -->
+
+                          <input type='text' class="form-control" required name="calender"/>
+                          <span class="input-group-addon">
+                                  <span class="glyphicon glyphicon-calendar"></span>
+                          </span>
+                      </div>
+                      <button class="btn-primary btn-lg" type="submit">Set up Meet!</button>
+                  </div>
                 </form>
             </div>
         <!-- date time picker -->
@@ -78,7 +82,10 @@
         });
         document.getElementById("form").addEventListener("submit", function(event){
             event.preventDefault();
-            swal("Meet fixed", "", "success");
+            swal("Meet fixed ", "", "success");
+            setTimeout(function(){ 
+              document.getElementById("form").submit();
+            }, 2000);
         });
     </script>
   </body>
