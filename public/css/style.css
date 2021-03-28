@@ -1,3 +1,36 @@
+@media (max-width: 480px) {
+  .navbar-nav .open .dropdown-menu {
+    position: absolute;
+    top:50px;
+    float: none;
+    width: auto;
+    background-color: transparent;
+    border: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+  }
+
+}
+
+  .dropdown-menu {
+  position:absolute;
+  top:30px;
+  }
+
+
+@media screen and (min-width: 480px) {
+  
+  .ml3  {
+    margin:30px;
+  }
+  
+ /* .ml3{
+   top:200px;
+   position:absolute;
+   left:120px;
+   } */
+ }
+
 .spacing{
   padding:20px;
 }
@@ -146,7 +179,7 @@ color:black;
 body {
   font: 100% Helvetica, sans-serif;
   color: #333;
-  background-color: #333; 
+  background-color: #262626; 
   /* FF4A87 */
 }
 .navbar-nav{
