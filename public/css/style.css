@@ -1,3 +1,6 @@
+.spacing{
+  padding:20px;
+}
 .ml3 {
   font-weight: 900;
   font-size: 3.5em;
@@ -6,6 +9,95 @@
   left:300px;
 }
 
+#features {
+  position: relative;
+}
+
+.feature-title {
+  font-size: 1.5rem;
+}
+
+.feature-box {
+  padding: 4.5%;
+}
+
+
+#testimonials {
+  background-color:black;
+}
+
+.testimonial-text {
+  font-size: 3rem;
+  line-height: 1.5;
+}
+
+.testimonial-image {
+  width: 10%;
+  border-radius: 100%;
+  margin: 20px;
+}
+
+
+#press {
+  background-color: black;
+  padding-bottom: 3%;
+}
+
+.press-logo {
+  width: 15%;
+  margin: 20px 20px 50px;
+}
+
+/* aboutus Section */
+.colored-section {
+  background-color: black;
+  color: #fff;
+}
+.clrblack{
+color:black;
+}
+#aboutus {
+  margin-top: 5%;
+  padding: 100px;
+}
+.white-section {
+  background-color: #fff;
+}
+
+.price-text {
+  font-size: 3rem;
+  line-height: 1.5;
+}
+
+.section-heading {
+  font-size: 3rem;
+  line-height: 1.5;
+}
+.aboutus-column {
+  padding: 3% 2%;
+}
+
+.icon {
+  color:grey;
+  margin-bottom: 1rem;
+}
+
+.icon:hover {
+  color: #8f8f8f;
+}
+
+
+.social-icon {
+  margin: 10px 10px;
+}
+.white-section
+{
+  color:white;
+  background-color:black;
+  
+  text-align:center;
+  padding:30px;
+}
 .elderdd{
   position:absolute;
   left:20px;
