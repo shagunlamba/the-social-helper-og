@@ -381,18 +381,7 @@ app.post("/map", function(req,res){
 const cors = require("cors");
 // Body parser
 app.use(express.json());
-// Enable cors
 app.use(cors());
-
-// app.get("/api/v1/stores", function(req,res,next){
-//     res.send("Hello World");
-// })
-// // here postman
-// app.post("/api/v1/stores", async (req,res,next) =>{
-//     console.log("The data that came in", req.body);
-// });
-
-
 
 
 
