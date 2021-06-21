@@ -23,13 +23,8 @@
   .ml3  {
     margin:30px;
   }
-  
- /* .ml3{
-   top:200px;
-   position:absolute;
-   left:120px;
-   } */
- }
+
+}
 
 .spacing{
   padding:20px;
@@ -90,8 +85,8 @@
 color:black;
 }
 #aboutus {
-  margin-top: 5%;
-  padding: 100px;
+  /* margin-top: 5%; */
+  /* padding: 100px; */
 }
 .white-section {
   background-color: #fff;
@@ -105,6 +100,7 @@ color:black;
 .section-heading {
   font-size: 3rem;
   line-height: 1.5;
+  color: #1382C5 !important;
 }
 .aboutus-column {
   padding: 3% 2%;
@@ -125,8 +121,8 @@ color:black;
 }
 .white-section
 {
-  color:white;
-  background-color:black;
+  color: black;
+  background-color: #fafafa !important;
   
   text-align:center;
   padding:30px;
@@ -179,7 +175,7 @@ color:black;
 body {
   font: 100% Helvetica, sans-serif;
   color: #333;
-  background-color: #262626; 
+  background-color: #fafafa; 
   /* FF4A87 */
 }
 .navbar-nav{
@@ -210,7 +206,7 @@ margin-right:10px;
     background-position: center;
     height:92vh;
     width: 100vw;
-} 
+}
 
 
 
@@ -218,7 +214,7 @@ margin-right:10px;
 .footer{
   padding: 20px 0;
   text-align: center;
-  color: white;
+  color: black;
 }
 
 /* Chat styles */
@@ -319,5 +315,20 @@ div li a {
 	color: #fff;
 	font-weight:normal;
   
+}
+
+.nav-fonts{
+  font-family: 'sans-serif' !important;
+}
+
+.reg-links{
+  font-family: 'Times New Roman', Times, serif;
+}
+
+.mission-para{
+    color: black;
+    font-family: serif;
+    font-size: 23px;
+    padding: 50px 0;
 }
 
